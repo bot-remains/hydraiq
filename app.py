@@ -1,4 +1,7 @@
 from flask import Flask, jsonify, request, Response
+import bs4
+from langchain_community.document_loaders import WebBaseLoader
+from flask_cors import CORS
 
 from chatbot.chat_utils import fetchChatHistory, chatWithChain
 from chatbot.download_files import download_s3_bucket
@@ -6,6 +9,15 @@ from chatbot.access_files import get_files
 from data_setup.llm_extract import do_the_thing
 
 app = Flask(__name__)
+CORS(app)
+
+@app.route("/scrape")
+def scrape():
+    loader = WebBaseLoader(web_paths=[url])
+    docs = []
+    for doc in loader.lazy_load():
+        docs.append(doc)
+    return Response(docs,)
 
 @app.route("/chat/prepare-dataset")
 def prepare():

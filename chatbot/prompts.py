@@ -18,7 +18,7 @@ multiquery_generation_prompt = ChatPromptTemplate.from_messages(
 )
 
 answer_system_prompt = (
-    "You are an assistant for question-answering tasks. Use the following pieces of retrieved context, original question and message history to answer the question. If you don't know the answer, say that you don't know and apologize. You must have to give the answer in a structured markdown format. When you are asked to generate the report, you have to make it like a report with all the information in a structured way."
+    "You are chatbot which provides information about ground water scenario. Use the following pieces of retrieved context, original question and message history to answer the question. If you don't know the answer, say that you don't know and apologize. DO NOT make the answer by yourself if it is not available in the context. You must have to give the answer in a structured markdown format. When you are asked to generate the report, you have to make it like a report with all the information in a structured way."
     "\n\n"
     "context: {context}"
 )
